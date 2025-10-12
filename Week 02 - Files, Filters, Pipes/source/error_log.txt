@@ -1,0 +1,9 @@
+Error -- Not really important.
+Error -- Not really important.
+Warning -- Neglect this.
+Error -- Really important.
+Error -- Somewhat important.
+Error -- Amazingly important.
+Warning -- Well, not so important.
+Error -- Well, important.
+Error -- Not really important.
