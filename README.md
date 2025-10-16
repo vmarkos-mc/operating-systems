@@ -19,6 +19,11 @@ The course is divided into weekly modules, each containing lecture notes (often 
 | Folder | Description |
 | :--- | :--- |
 | `Week 01 - Introduction` | Covers the definition and history of Operating Systems, system structures, and an introduction to the Unix/Linux environment and shell. |
+| `Week 02 - Files, Filters, Pipes` | Introduce filters, files, pipes and how to play with them in Linux. |
+| `Week 03 - Processes` | Discuss about processes, system processes in particular, and play along from terminal. |
+| `Week 04 - Users And Rights` | User and group structure in Linux. |
+| `Week 05 - Bash Revision` | A quick revision on Bash. |
+| `Week 06 - Introduction To C` | Introduction to elementary C concepts, and Linux System Calls. |
 | `LICENSE` | The MIT License for this project. |
 | ... | *More weekly modules will cover Processes, Threads, CPU Scheduling, Deadlocks, Memory Management, and File Systems.* |
 
