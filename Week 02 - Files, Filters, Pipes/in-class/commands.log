@@ -1,0 +1,105 @@
+    1  cd ..
+    2  ls
+    3  cd mc
+    4  pwd
+    5  ls
+    6  who
+    7  whoami
+    8  su
+    9  clear
+   10  ls
+   11  ls -a
+   12  ls -al
+   13  cd .cache
+   14  ls
+   15  cd ..
+   16  pwd
+   17  cd Documents/
+   18  ls
+   19  mkdir lab2
+   20  ls
+   21  cd *
+   22  cd ..
+   23  mkdir lab1
+   24  cd *
+   25  cd lab2
+   26  ls -al
+   27  source ~/.bashrc
+   28  source ~/.profile
+   29  touch test_001
+   30  ls
+   31  nano test_001
+   32  cat test_001
+   33  head test_001
+   34  nano test_002
+   35  ls
+   36  cat test_001 test_002
+   37  cat test_001 test_002 > test_003
+   38  ls
+   39  cat test_003
+   40  cat -h
+   41  cat --help
+   42  cat -n test_003
+   43  clear
+   44  cat --help
+   45  cat -nE test_003
+   46  cat --help
+   47  head test_003
+   48  head -n 5 test_003
+   49  head -n 15 test_003
+   50  tail test_003
+   51  lynx
+   52  mkdir a
+   53  mkdir b c
+   54  ls
+   55  mv test_001 a
+   56  ls
+   57  cp test_002 a
+   58  ls
+   59  ls a
+   60  mv test_003 test_004
+   61  ls
+   62  history
+   63  history > commands.log
+   64  ls
+   65  head commands.log
+   66  tail commands.log
+   67  ls
+   68  python3
+   69  3 + 2
+   70  history
+   71  clear
+   72  ls -l
+   73  touch a/test_101
+   74  ls a -l
+   75  ls a/test_00?
+   76  ls a/test_*
+   77  ls a/test_???
+   78  ls a/test_??
+   79  head commands.log
+   80  whoami
+   81  sudo whoami
+   82  history > commands.log
+   83  nano commands.log
+   84  cat commands.log | grep who
+   85  cat commands.log | grep ^who
+   86  cat commands.log | grep -e ^who
+   87  cat commands.log | grep -e "^who"
+   88  cat commands.log | grep -e "$who"
+   89  cat commands.log | grep -E "^who"
+   90  clear
+   91  cat commands.log | grep who
+   92  sort --help
+   93  cat commands.log | grep who | sort -n -r
+   94  history > commands.log
+   95  cat commands.log | grep who | sort -n -r
+   96  nano foo.sh
+   97  ls
+   98  foo.sh
+   99  source foo.sh
+  100  ./foo.sh
+  101  ls -l
+  102  chmod +x foo.sh
+  103  ls -l
+  104  ./foo.sh
+  105  history > commands.log
