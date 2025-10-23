@@ -103,3 +103,43 @@
   103  ls -l
   104  ./foo.sh
   105  history > commands.log
+  106  ./foo.sh
+  107  man grep
+  108  ls
+  109  echo "Echo test" > test_002
+  110  tail test_002
+  111  exit
+  112  ls
+  113  nano file_check.sh
+  114  ls
+  115  ls -l
+  116  nano file_check.sh 
+  117  ls -l
+  118  file_check.sh
+  119  ./file_check.sh
+  120  ls -l
+  121  source ./file_check.sh
+  122  chmod +x file_check.sh
+  123  ls -l
+  124  ./file_check.sh
+  125  touch test.file
+  126  ./file_check.sh
+  127  ls -l
+  128  cat test.file
+  129  cp file_check.sh /bin
+  130  sudo cp file_check.sh /bin
+  131  ls /bin
+  132  ls bin -l
+  133  ls -l /bin
+  134  ls /bin
+  135  ls /bin -l
+  136  ls /bin/ -l
+  137  ls /bin/ -l | grep sh$
+  138  ls /bin/ -l | grep .sh$
+  139  ls /bin/ -l | grep \.sh$
+  140  ls /bin/ -l | grep sh$
+  141  ls /bin/ -l | grep -E  \.sh$
+  142  ls /bin/*sh -l
+  143  file_check.sh
+  144  ls /bin/file_check.sh -l
+  145  history > command.log

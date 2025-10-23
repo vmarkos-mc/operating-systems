@@ -1,0 +1,85 @@
+    1  history
+    2  ls /mnt
+    3  ls /mnt/
+    4  mount /mount/hgfs
+    5  ls
+    6  exit
+    7  ls -l
+    8  mv command.log commands.log
+    9  ls -l
+   10  ls -1
+   11  touch bash bush brush
+   12  ls -1
+   13  ls b{a,u,ru}sh
+   14  nano look_for_stuff.sh
+   15  ls -1
+   16  source ./look_for_stuff.sh
+   17  touch file_01 file_04
+   18  source ./look_for_stuff.sh
+   19  chmod +x look_for_stuff.sh 
+   20  ls -1
+   21  ./look_for_stuff.sh 
+   22  nano look_for_stuff.sh
+   23  ls -1
+   24  ./look_for_stuff.sh 
+   25  nano look_for_stuff.sh
+   26  ls -1
+   27  chmod +x line_reader.sh 
+   28  ./line_reader.sh 
+   29  man grep
+   30  ls -l
+   31  grep ".sh$"
+   32  grep -E ".sh$"
+   33  grep sh
+   34  grep sh .
+   35  ls -1
+   36  ls -1 | grep ".sh$"
+   37  ls -1 | grep "{.}sh$"
+   38  ls -1 | grep "\.sh$"
+   39  ls -1 | grep "\.sh$" | wc -l
+   40  chmod +x count_sh.sh 
+   41  ./count_sh.sh
+   42  ls -1
+   43  count_sh.sh
+   44  cp count_sh.sh /bin
+   45  sudo cp count_sh.sh /bin
+   46  ls /bin/*.sh
+   47  count_sh.sh
+   48  cd /bin
+   49  count_sh.sh
+   50  cd /home/mc/Documents/lab3 && count_sh.sh
+   51  cd ..
+   52  ls sf_OS_shared
+   53  ls sf_OS_shared/
+   54  ls /dev/sf_OS_shared/
+   55  ls /dev/sf_OS_shared
+   56  ls /mnt/sf_OS_shared
+   57  cd /media
+   58  ls
+   59  cd sf_OS_shared/
+   60  ls -al
+   61  cd sf_OS_shared/
+   62  sudo cd sf_OS_shared/
+   63  ls -1 /home/mc/Documents
+   64  cp /home/mc/Documents/* /media/sf_OS_shared
+   65  cp -r /home/mc/Documents/* /media/sf_OS_shared
+   66  sudo cp -r /home/mc/Documents/* /media/sf_OS_shared
+   67  cd ~/Documents/lab3
+   68  ls
+   69  sort foo.txt
+   70  sort -n foo.txt
+   71  sort -n -k 2 foo.txt
+   72  sort -k 2 foo.txt
+   73  sort -n -k 2 foo.txt
+   74  sort -n -k 3 foo.txt
+   75  sort -n -k 4 foo.txt
+   76  history > commands_new.log
+   77  ls
+   78  head commands_new.log 
+   79  ls -1
+   80  head file_01
+   81  echo "Hi!" > file_01
+   82  head file_01
+   83  echo "Hi, again!" >> file_01
+   84  head file_01
+   85  history > commands_new.log 
