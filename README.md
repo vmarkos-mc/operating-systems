@@ -1,5 +1,7 @@
 # Operating Systems: Introductory Course with a Linux Focus
 
+*For details regarding this module's **assessment** please see: [Assessment](https://github.com/vmarkos-mc/operating-systems/tree/main/Assessment)*
+
 This repository contains the materials for an introductory course on **Operating Systems**. The course balances core concepts of OS theory (processes, memory management, file systems) with practical examples and assignments focused heavily on the **Linux/Unix environment**.
 
 The goal is to provide a solid foundation in how operating systems function, complemented by hands-on experience using system calls, shell scripting, and basic concurrency programming.
@@ -41,7 +43,7 @@ To work with the material in this course, a Linux/Unix environment is strongly r
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/vmarkos-mc/operating-systems.git](https://github.com/vmarkos-mc/operating-systems.git)
+    git clone https://github.com/vmarkos-mc/operating-systems.git
     cd operating-systems
     ```
 
