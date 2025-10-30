@@ -1,0 +1,287 @@
+    1  history
+    2  ls /mnt
+    3  ls /mnt/
+    4  mount /mount/hgfs
+    5  ls
+    6  exit
+    7  ls -1
+    8  ./look_for_stuff.sh 
+    9  seq 0 3 15
+   10  nano line_reader.sh
+   11  nano count_sh.sh
+   12  nano foo.txt
+   13  ls
+   14  cd ic_001
+   15  ls
+   16  chmod +x ex_001.sh 
+   17  ./ex_001.sh
+   18  touch test.special foo.special bar.special
+   19  ./ex_001.sh
+   20  cd ..
+   21  sudo cp -r . /media/sf_OS_shared
+   22  exit
+   23  ls -l
+   24  mv command.log commands.log
+   25  ls -l
+   26  ls -1
+   27  touch bash bush brush
+   28  ls -1
+   29  ls b{a,u,ru}sh
+   30  nano look_for_stuff.sh
+   31  ls -1
+   32  source ./look_for_stuff.sh
+   33  touch file_01 file_04
+   34  source ./look_for_stuff.sh
+   35  chmod +x look_for_stuff.sh 
+   36  ls -1
+   37  ./look_for_stuff.sh 
+   38  nano look_for_stuff.sh
+   39  ls -1
+   40  ./look_for_stuff.sh 
+   41  nano look_for_stuff.sh
+   42  ls -1
+   43  chmod +x line_reader.sh 
+   44  ./line_reader.sh 
+   45  man grep
+   46  ls -l
+   47  grep ".sh$"
+   48  grep -E ".sh$"
+   49  grep sh
+   50  grep sh .
+   51  ls -1
+   52  ls -1 | grep ".sh$"
+   53  ls -1 | grep "{.}sh$"
+   54  ls -1 | grep "\.sh$"
+   55  ls -1 | grep "\.sh$" | wc -l
+   56  chmod +x count_sh.sh 
+   57  ./count_sh.sh
+   58  ls -1
+   59  count_sh.sh
+   60  cp count_sh.sh /bin
+   61  sudo cp count_sh.sh /bin
+   62  ls /bin/*.sh
+   63  count_sh.sh
+   64  cd /bin
+   65  count_sh.sh
+   66  cd /home/mc/Documents/lab3 && count_sh.sh
+   67  cd ..
+   68  ls sf_OS_shared
+   69  ls sf_OS_shared/
+   70  ls /dev/sf_OS_shared/
+   71  ls /dev/sf_OS_shared
+   72  ls /mnt/sf_OS_shared
+   73  cd /media
+   74  ls
+   75  cd sf_OS_shared/
+   76  ls -al
+   77  cd sf_OS_shared/
+   78  sudo cd sf_OS_shared/
+   79  ls -1 /home/mc/Documents
+   80  cp /home/mc/Documents/* /media/sf_OS_shared
+   81  cp -r /home/mc/Documents/* /media/sf_OS_shared
+   82  sudo cp -r /home/mc/Documents/* /media/sf_OS_shared
+   83  cd ~/Documents/lab3
+   84  ls
+   85  sort foo.txt
+   86  sort -n foo.txt
+   87  sort -n -k 2 foo.txt
+   88  sort -k 2 foo.txt
+   89  sort -n -k 2 foo.txt
+   90  sort -n -k 3 foo.txt
+   91  sort -n -k 4 foo.txt
+   92  history > commands_new.log
+   93  ls
+   94  head commands_new.log 
+   95  ls -1
+   96  head file_01
+   97  echo "Hi!" > file_01
+   98  head file_01
+   99  echo "Hi, again!" >> file_01
+  100  head file_01
+  101  history > commands_new.log 
+  102  clear && mkdir ic_001 && cd ic_001
+  103  ls
+  104  nano ex_001.sh
+  105  exit
+  106  pidof nautilus
+  107  pidof firefox
+  108  kill 4568 4424
+  109  pidof nautilus
+  110  kill 5275
+  111  pidof nautilus | kill
+  112  kill systemd
+  113  pidof systemd
+  114  kill 2074
+  115  history >> commands.log
+    1  history
+    2  clear
+    3  ps
+    4  ps -aux
+    5  ps -ef
+    6  ps -ejH
+    7  clear && top
+    8  clear
+    9  ls
+   10  ls &
+   11  fg 1
+   12  fg 7364
+   13  sleep 2
+   14  sleep 100 &
+   15  jobs
+   16  jobs -l
+   17  fg %1
+   18  ls
+   19  mkdir temp
+   20  touch test_01 test_02 test_03
+   21  ls
+   22  sort <(ls -l)
+   23  sort -n -k 8 <(ls -l)
+   24  ls -l | sort -n -k 8
+   25  kill <(pidof firefox)
+   26  kill <(pidof nautilus)
+   27  pidof nautilus
+   28  pidof firefox
+   29  kill 7867 7711
+   30  kill firefox
+   31  history >> commands.log 
+    1  history
+    2  ls /mnt
+    3  ls /mnt/
+    4  mount /mount/hgfs
+    5  ls
+    6  exit
+    7  ls -1
+    8  ./look_for_stuff.sh 
+    9  seq 0 3 15
+   10  nano line_reader.sh
+   11  nano count_sh.sh
+   12  nano foo.txt
+   13  ls
+   14  cd ic_001
+   15  ls
+   16  chmod +x ex_001.sh 
+   17  ./ex_001.sh
+   18  touch test.special foo.special bar.special
+   19  ./ex_001.sh
+   20  cd ..
+   21  sudo cp -r . /media/sf_OS_shared
+   22  exit
+   23  ls -l
+   24  mv command.log commands.log
+   25  ls -l
+   26  ls -1
+   27  touch bash bush brush
+   28  ls -1
+   29  ls b{a,u,ru}sh
+   30  nano look_for_stuff.sh
+   31  ls -1
+   32  source ./look_for_stuff.sh
+   33  touch file_01 file_04
+   34  source ./look_for_stuff.sh
+   35  chmod +x look_for_stuff.sh 
+   36  ls -1
+   37  ./look_for_stuff.sh 
+   38  nano look_for_stuff.sh
+   39  ls -1
+   40  ./look_for_stuff.sh 
+   41  nano look_for_stuff.sh
+   42  ls -1
+   43  chmod +x line_reader.sh 
+   44  ./line_reader.sh 
+   45  man grep
+   46  ls -l
+   47  grep ".sh$"
+   48  grep -E ".sh$"
+   49  grep sh
+   50  grep sh .
+   51  ls -1
+   52  ls -1 | grep ".sh$"
+   53  ls -1 | grep "{.}sh$"
+   54  ls -1 | grep "\.sh$"
+   55  ls -1 | grep "\.sh$" | wc -l
+   56  chmod +x count_sh.sh 
+   57  ./count_sh.sh
+   58  ls -1
+   59  count_sh.sh
+   60  cp count_sh.sh /bin
+   61  sudo cp count_sh.sh /bin
+   62  ls /bin/*.sh
+   63  count_sh.sh
+   64  cd /bin
+   65  count_sh.sh
+   66  cd /home/mc/Documents/lab3 && count_sh.sh
+   67  cd ..
+   68  ls sf_OS_shared
+   69  ls sf_OS_shared/
+   70  ls /dev/sf_OS_shared/
+   71  ls /dev/sf_OS_shared
+   72  ls /mnt/sf_OS_shared
+   73  cd /media
+   74  ls
+   75  cd sf_OS_shared/
+   76  ls -al
+   77  cd sf_OS_shared/
+   78  sudo cd sf_OS_shared/
+   79  ls -1 /home/mc/Documents
+   80  cp /home/mc/Documents/* /media/sf_OS_shared
+   81  cp -r /home/mc/Documents/* /media/sf_OS_shared
+   82  sudo cp -r /home/mc/Documents/* /media/sf_OS_shared
+   83  cd ~/Documents/lab3
+   84  ls
+   85  sort foo.txt
+   86  sort -n foo.txt
+   87  sort -n -k 2 foo.txt
+   88  sort -k 2 foo.txt
+   89  sort -n -k 2 foo.txt
+   90  sort -n -k 3 foo.txt
+   91  sort -n -k 4 foo.txt
+   92  history > commands_new.log
+   93  ls
+   94  head commands_new.log 
+   95  ls -1
+   96  head file_01
+   97  echo "Hi!" > file_01
+   98  head file_01
+   99  echo "Hi, again!" >> file_01
+  100  head file_01
+  101  history > commands_new.log 
+  102  clear && mkdir ic_001 && cd ic_001
+  103  ls
+  104  nano ex_001.sh
+  105  exit
+  106  pidof nautilus
+  107  pidof firefox
+  108  kill 4568 4424
+  109  pidof nautilus
+  110  kill 5275
+  111  pidof nautilus | kill
+  112  kill systemd
+  113  pidof systemd
+  114  kill 2074
+  115  ls /bin
+  116  grep --help
+  117  clear
+  118  ls
+  119  ps -aux
+  120  ps -ef
+  121  ps --help
+  122  ps --help l
+  123  man ps
+  124  ps -eo pid,ppid
+  125  ps -eo pid,ppid | grep "6001"
+  126  ps -eo pid,ppid | grep "5847"
+  127  ps -eo pid,ppid | grep "5847$"
+  128  ps -eo pid,ppid | grep -v "5847$"
+  129  ps -eo pid,ppid | grep  "^5847"
+  130  ps -eo pid,ppid | grep -E "^5847"
+  131  ps -eo pid,ppid | grep -E "^   5847"
+  132  ps -eo pid,ppid | grep -E "^ *5847"
+  133  ps -eo pid,ppid | grep -E "^[[:space:]]*5847"
+  134  sed --help
+  135  man sed
+  136  man grep
+  137  man grep | grep "regular expression"
+  138  man grep | grep -n "regular expression"
+  139  man grep | grep -n "[Rr]egular expression"
+  140  man grep | grep -n "[Rr]egular [Ee]xpression"
+  141  history >> commands.log
