@@ -1,0 +1,334 @@
+% !TeX spellcheck = en_GB
+% !TeX TS-program = xelatex
+\documentclass[aspectratio=169, 12pt]{beamer}
+\usefonttheme{professionalfonts}
+\usefonttheme{serif}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec-xetex}
+
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{subcaption}
+\setmainfont{Lato}
+
+% Bibliography
+\usepackage[style=authortitle,backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+% Local configuration
+\renewcommand{\figurename}{}
+\DeclareCaptionFormat{custom}
+{%
+	\tiny #3
+}
+\captionsetup{format=custom}
+
+% Title stuff
+\title{Operating Systems}
+\subtitle{A (Soft) Introduction to C, Part I}
+\date{Week 06}
+\author{Vassilis Markos, Mediterranean College}
+
+\usetheme{streamline}
+
+% Local Commands
+\newcommand{\ohref}[1]{\href{#1}{\texttt{#1}}}
+
+% Code listings
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+	\begin{frame}
+		\titlepage
+	\end{frame}
+
+	\begin{frame}{Contents}
+		\tableofcontents
+	\end{frame}
+	
+	\section{Introduction to C++: \texttt{helloWorld.c}}
+	
+	\sectionframe	
+	
+	\begin{frame}{Some Programming Humour, First\ldots}
+		\begin{figure}[!htb]
+			\centering
+			\includegraphics[height=0.5\textheight]{./assets/pointers.png}
+			\caption{If you already understand this, you might be in the wrong room. Source: \href{https://xkcd.com/138/}{\texttt{https://xkcd.com/138/}}.}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}[fragile]{\texttt{helloWorld.c}}
+		\lstinputlisting[language=C]{../source/helloWorld.c}
+		To execute: \texttt{gcc helloWorld.c -o helloWorld \&\& ./helloWorld}
+	\end{frame}
+
+	\begin{frame}{Notes on \texttt{helloWorld.c}}
+		\begin{itemize}
+			\item \texttt{\#include} is a Preprocessor command informing the preprocessor that it should ``copy--paste'' into this file the contents of the \texttt{stdio} library.
+			\item Printing and IO, in general, is not built into C, as it is, e.g., in Python. So, we have to import \texttt{stdio.h} for that purpose.
+			\item \texttt{return 0;} is a typical spell included in the end of every \texttt{main()} function.
+			\begin{itemize}
+				\item We shall see in the near future that we can safely forget this in many cases, though.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Fancy String Characters in C++}
+		\small\centering%
+		\begin{tabular}{cl}
+			\toprule%
+			\textbf{Sequence} & \textbf{Meaning} \\\midrule
+			\texttt{\textbackslash a}   & System bell (``beeps'')\\%
+			\texttt{\textbackslash b}   & Backspace\\%
+			\texttt{\textbackslash f}   & Page break (form feed)\\%
+			\texttt{\textbackslash n}   & Line break (newline)\\%
+			\texttt{\textbackslash r}   & Carriage return (returns the cursor to start of line)\\%
+			\texttt{\textbackslash t}   & Tab\\%
+			\texttt{\textbackslash\textbackslash}   & Backslash\\%
+			\texttt{\textbackslash'}   & Single quote\\%
+			\texttt{\textbackslash"}   & Double quote\\%
+			\texttt{\textbackslash c}   & Character represented by integer $c$\\%
+			\bottomrule
+		\end{tabular}
+	\end{frame}
+
+	\begin{frame}{Frequently Used C Data Types}
+		\centering
+		\begin{tabular}{lp{0.6\textwidth}l}
+			\toprule%
+			\textbf{Type Name} & \textbf{Description} & \textbf{Size}\\\midrule%
+			\texttt{char} & Single text character, indicated with single quotes & 1 byte\\%
+			\texttt{int} & Signed or unsigned integer & 4 bytes\\%
+			\texttt{bool}\footnotemark & Boolean & 1 byte\\%
+			\texttt{float} & Float number, 7 decimal digits accuracy & 4 bytes\\%
+			\texttt{double} & Double accuracy float, 15 decimal digits. & 8 bytes\\%
+			\bottomrule
+		\end{tabular}
+		\footnotetext{Booleans are not a built--in feature of C; we need to include \texttt{stdbool.h}. Or just use \texttt{0} for \texttt{false} and \texttt{1} for \texttt{true}, alongside bitwise operators --- your choice.\vspace{1em}}
+	\end{frame}
+
+	\begin{frame}{Frequently Used C++ Operators}
+		\centering
+		\begin{tabular}{lp{0.7\textwidth}}
+			\toprule%
+			\textbf{Operator(s)} & \textbf{Description}\\\midrule%
+			\texttt{+}, \texttt{-}, \texttt{*}, \texttt{/} & Addition, subtraction, multiplication, division, priority determined as in maths (plus parentheses).\\%
+			\texttt{\%} & Modulus operator: Remainder of integer division, e.g., \texttt{13 \% 4} evaluates to \texttt{1}.\\%
+			\texttt{\&\&}, \texttt{||}, \texttt{!} & Logical \texttt{AND}, \texttt{OR}, \texttt{NOT}.\\%
+			\texttt{==}, \texttt{!=} & \texttt{equals} and \texttt{not equals}.\\%
+			\texttt{<}, \texttt{>} & \texttt{larger than} and \texttt{less than}.\\%
+			\bottomrule
+		\end{tabular}
+	\end{frame}
+
+	\section{Flow Control}
+	
+	\sectionframe	
+
+	\begin{frame}{Flow Control in C++}
+		\centering
+		\scalebox{0.75}{%
+		\lstinputlisting[language=C]{../source/flowControl.c}}
+	\end{frame}
+
+	\begin{headsup}{User Input In C}
+		\begin{itemize}
+			\item To read user input, we used the following line of C code:
+			\lstinputlisting[language=C, linerange={7-7}]{../source/flowControl.c}
+			\item Breaking it down a bit:
+			\begin{itemize}
+				\item \texttt{scanf()} is the \texttt{stdio.h} function that lets us read from the input stream.
+				\item The first argument is a \emph{format specifier}, which explains to the compiler how to handle the provided string (array of characters).
+				\item The second argument is a pointer to the variable we want this piece of information to be stored at.
+				\item For the time being, you can think of the second argument as the target variable, prefixed by an ampersand (\texttt{\&}).
+			\end{itemize}
+		\end{itemize}
+	\end{headsup}
+
+	\begin{headsup}{Format Specifiers}
+		\begin{itemize}
+			\item The general shape of a format specifier is: \texttt{\%[*][width][length]specifier}.
+			\item Some common format specifiers are:
+			\begin{itemize}
+				\item \texttt{\%d}: Signed integers, with any number of digits.
+				\item \texttt{\%u}: Unsigned integers, with any number of digits.
+				\item \texttt{\%f}: Floating point numbers, with any number of digits.
+				\item \texttt{\%c}: Characters (no null termination here, see below).
+				\item \texttt{\%s}: Null--terminated strings, including any character besides whitespace --- so, the scanner stops at the first whitespace, introducing a \texttt{null} character there.
+			\end{itemize}
+		\end{itemize}
+	\end{headsup}
+
+	\begin{headsup}{Format Specifiers}
+		\begin{itemize}
+			\item In our case, we used a somewhat complex format specifier: \texttt{" \%c"}.
+			\item The \texttt{\%c} part in the above is to read the next character entered by the user, as discussed above.
+			\item Trying to remove the single blank space on the left, recompiling and executing the executable will result to actually prohibiting you from providing any input.
+			\item That is because we use a \emph{newline} character at the end of \texttt{printf()}, which is directly consumed by \texttt{scanf()} next.
+			\item To prohibit that from happening, we add a blank space, indicating that \texttt{scanf()} should ignore any trailing whitespace.
+		\end{itemize}
+	\end{headsup}
+
+	\begin{irrelevant}{Format Specifier Fun}
+		\begin{itemize}
+			\item A nice resource on format specifiers in C / C++ can be found here: \href{https://cplusplus.com/reference/cstdio/scanf/}{https://cplusplus.com/reference/cstdio/scanf/}.
+			\item The format specification language is rich enough to be Turing complete\footfullcite{printfTuring}, i.e., to allow for anything programmable to be programmed on it!
+			\begin{itemize}
+				\item Available online \href{https://www.usenix.org/system/files/conference/usenixsecurity15/sec15-paper-carlini.pdf}{here}.
+			\end{itemize}
+			\item An example of implementing Tic--Tac--Toe using just \texttt{printf()}: \href{https://www.ioccc.org/2020/carlini/index.html}{https://www.ioccc.org/2020/carlini/index.html}
+		\end{itemize}
+	\end{irrelevant}
+
+	\begin{frame}{\texttt{while} Loops in C}
+		\centering
+		\scalebox{0.75}{%
+			\lstinputlisting[language=C]{../source/whileLoop.c}}
+	\end{frame}
+
+	\begin{frame}{\texttt{for} Loops in C++}
+		\centering
+		\scalebox{0.8}{%
+			\lstinputlisting[language=C]{../source/forLoop.c}}
+	\end{frame}
+	
+	\begin{frame}{Useful Resources}
+		Some resources you might find useful in your C++ journey:
+		\begin{itemize}
+			\item C Video Tutorial: \href{https://www.youtube.com/watch?v=xND0t1pr3KY}{https://www.youtube.com/watch?v=xND0t1pr3KY}
+			\item Learn-C Tutorial (interactive): \href{https://www.learn-c.org/}{https://www.learn-c.org/}.
+			\item Amazing C guide for anything in this course --- and much more: \href{https://beej.us/guide/bgc/}{https://beej.us/guide/bgc/}.
+			\begin{itemize}
+				\item You might also fancy the corresponding networks programming using C, by Beej: \href{https://beej.us/guide/bgnet/}{https://beej.us/guide/bgnet/}.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\section{Fun Time!}\label{sec:fun-time}
+	
+	\sectionframe
+	
+	\begin{frame}{In--class Exercise \#001}
+		Write a C++ program that:
+		\begin{itemize}
+			\item asks the user for a positive integer number, $n$;
+			\item checks if the number is even or odd, and;
+			\item prints on screen \texttt{even} if the number is even, \texttt{odd} otherwise.
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{In--class Exercise \#002}
+		A PC manufacturer has the following retail pricing catalogue:
+		\begin{itemize}
+			\item For orders with at most 100 PCs, unit cost is 560\$ each.
+			\item For orders with at most 250 PCs, the first 100 are priced as above and the rest at 480\$ each.
+			\item For orders with at most 400 PCs, the first 250 are priced as above and the rest at 400\$ each.
+			\item For orders above 400 PCs, the first 400 are priced as above and the rest at 320\$ each.
+		\end{itemize}
+		Write a C++ program that accepts the number of PCs ordered by some customer and computes and prints on screen to total cost of that order.
+	\end{frame}
+
+	\begin{frame}{In--class Exercise \#003}
+		Write a C++ program that:
+		\begin{itemize}
+			\item asks the user for a positive integer number, $n$;
+			\item checks if the number is prime or not, and;
+			\item prints on screen \texttt{prime} if the number is prime, \texttt{composite} otherwise.
+		\end{itemize}
+		As a reminder, a positive integer, $n$, is said to be prime if the following conditions hold (both of them):
+		\begin{itemize}
+			\item $n>1$.
+			\item The only divisors of $n$ are $1$ and $n$.
+		\end{itemize}
+		So, 2, 7, 13 and 19 are some primes while 4, 15 and 21 are not.
+	\end{frame}
+
+	\begin{frame}{In--class Exercise \#004}%
+		\begin{minipage}[t]{0.40\textwidth}%
+			\vspace{0pt}\raggedright%
+			Consider the C code shown right.
+			\begin{itemize}
+				\item Without compiling and executing it, what do you expect it to do?
+				\item Compile and run that program. What did it print?
+				\item Can you explain it?
+			\end{itemize}
+		\end{minipage}\hfill
+		\begin{minipage}[t]{0.57\textwidth}%
+			\vspace{0pt}\raggedleft%
+			\lstinputlisting[language=C]{../source/exercise004.c}
+		\end{minipage}
+	\end{frame}
+
+	\begin{frame}{In--class Exercise \#005}%
+		\begin{minipage}[t]{0.40\textwidth}%
+			\vspace{0pt}\raggedright%
+			Consider the C code shown right.
+			\begin{itemize}
+				\item Without compiling and executing it, what do you expect it to do?
+				\item Compile and run that program. What did it print?
+				\item Can you explain it?
+			\end{itemize}
+		\end{minipage}\hfill
+		\begin{minipage}[t]{0.57\textwidth}%
+			\vspace{0pt}\raggedleft%
+			\lstinputlisting[language=C]{../source/exercise005.c}
+		\end{minipage}
+	\end{frame}
+	
+	\begin{frame}{Homework}%
+		Complete all exercises and problems in MIT's C++ course first assignment, found here:
+		\begin{center}%
+			\vspace{-1.7\topsep}%
+			\small%
+			\href{https://ocw.mit.edu/courses/6-096-introduction-to-c-january-iap-2011/resources/mit6_096iap11_assn01/}{\texttt{https://ocw.mit.edu/courses/6-096-introduction-to-c-january-iap-2011/\\resources/mit6\_096iap11\_assn01/}}%
+		\end{center}
+		For your convenience, you can also find the assignment file in this lecture's materials, at: \ohref{../homework/MIT6-096IAP11-assn01.pdf}.
+		Submit all your work in the online form below as a single \texttt{.zip} file:
+		\begin{center}
+			\ohref{https://forms.gle/rSq3VSpcouRAVjqMA}
+		\end{center}
+		or via email at: \texttt{v.markos@mc-class.gr}.
+	\end{frame}
+
+	\begin{frame}{Any Questions?}
+		\begin{minipage}{0.35\textwidth}
+			\raggedright
+			Do not forget to fill in the questionnaire shown right!
+		\end{minipage}\hfill
+		\begin{minipage}{0.58\textwidth}
+			\vspace{0pt}
+			\raggedleft
+			\includegraphics[scale=0.4]{./assets/post_lesson_assessment.png}
+			\centering
+			\ohref{https://forms.gle/dKSrmE1VRVWqxBGZA}
+		\end{minipage}
+	\end{frame}
+	
+\end{document}

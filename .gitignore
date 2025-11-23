@@ -1,0 +1,13 @@
+# Ingore LaTeX AUX files
+
+*.aux
+*.lof
+*.log
+*.lot
+*.toc
+*.bbl
+*.blg
+*.nav
+*.out
+*.snm
+*.vrb
