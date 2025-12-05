@@ -1,0 +1,5 @@
+this is a text document
+containing some really important information
+actually, all information contained 
+in this file is encrypted using a 
+sophisticated protocol
