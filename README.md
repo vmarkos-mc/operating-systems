@@ -26,8 +26,13 @@ The course is divided into weekly modules, each containing lecture notes (often 
 | `Week 04 - Users And Rights` | User and group structure in Linux. |
 | `Week 05 - Bash Revision` | A quick revision on Bash. |
 | `Week 06 - Introduction To C` | Introduction to elementary C concepts, and Linux System Calls. |
+| `Week 07 - Memory Management in C` | Pointers, arrays, and other C cool stuff... |
+| `Week 08 - Introduction To IPC` | Introduction to Inter-process Communication. |
+| `Week 09 - Shared Memory and Message Queues` | Examples on sharing data usign shared memory segments and message queues. |
+| `Week 10 - Concurrency` | Introduction to concurrency at an OS level. |
+| `Week 11 - Semaphores and Sockets` | Introduction to Semaphores and UDP Sockets. |
+| `Week 12 - Revision` | All-inclusive revision quiz! |
 | `LICENSE` | The MIT License for this project. |
-| ... | *More weekly modules will cover Processes, Threads, CPU Scheduling, Deadlocks, Memory Management, and File Systems.* |
 
 ## Getting Started
 
