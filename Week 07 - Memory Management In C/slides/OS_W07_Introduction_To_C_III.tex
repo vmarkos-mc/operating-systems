@@ -1,0 +1,346 @@
+% !TeX spellcheck = en_GB
+% !TeX TS-program = xelatex
+\documentclass[aspectratio=169, 12pt]{beamer}
+\usefonttheme{professionalfonts}
+\usefonttheme{serif}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec-xetex}
+
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{subcaption}
+\setmainfont{Lato}
+
+% Local configuration
+\renewcommand{\figurename}{}
+\DeclareCaptionFormat{custom}
+{%
+	\tiny #3
+}
+\captionsetup{format=custom}
+
+% Title stuff
+\title{Operating Systems}
+\subtitle{A (Soft) Introduction to C, Part III}
+\date{Week 07}
+\author{Vassilis Markos, Mediterranean College}
+
+\usetheme{streamline}
+
+% Local Commands
+\newcommand{\ohref}[1]{\href{#1}{\texttt{#1}}}
+
+% Code listings
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% Exercise number
+
+\makeatletter
+\newcommand{\arabicthree}[1]{\expandafter\@arabicthree\csname c@#1\endcsname}
+\newcommand{\@arabicthree}[1]{\ifnum #1<100 0\fi\ifnum #1<10 0\fi\number#1}
+\makeatother
+
+\newcounter{exno}
+\setcounter{exno}{0}
+
+\newcommand{\exno}{\stepcounter{exno}In--class Exercise \#\arabicthree{exno}}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\begin{frame}{Contents}
+		\tableofcontents
+	\end{frame}
+	
+	\section{Pointers}\label{sec:pointers}
+	
+	\sectionframe
+	
+	\begin{frame}{Stars And C}
+			What will this program print? (Do not execute it!)
+			\lstinputlisting[language=C]{../source/stars_001.c}
+		\end{frame}
+
+	\begin{frame}{What Are \texttt{*} and \texttt{\&}?}
+			\begin{itemize}
+					\item What is \texttt{*y} in the above program at line 9?\pause
+					\begin{itemize}
+							\item \texttt{*y} denotes the memory location of a \texttt{double} variable, \texttt{x} in our case. Such variables are called \textbf{pointers}.\pause
+						\end{itemize}
+					\item What is \texttt{*y} in the above program, at line 10?\pause
+					\begin{itemize}
+							\item \texttt{*y} denotes the content at the memory location stored by pointer \texttt{y}. Retrieving a pointer's pointed value is often called \textbf{dereferencing}.\pause
+						\end{itemize}
+					\item What is \texttt{\&x} in the above program at line 9?\pause
+					\begin{itemize}
+							\item \texttt{\&x} indicates the memory location where the content of variable \texttt{x} is stored in the computer's memory, i.e., it is a \textbf{reference} of \texttt{x}.
+						\end{itemize}
+				\end{itemize}
+		\end{frame}
+
+	\begin{frame}{Can You Predict The Output?}
+			\lstinputlisting[language=C]{../source/stars_002.c}
+		\end{frame}
+
+	\begin{frame}{Can You Predict The Output?}
+			\lstinputlisting[language=C]{../source/stars_003.c}
+		\end{frame}
+
+	\begin{frame}{Can You Predict The Output?}
+			\lstinputlisting[language=C]{../source/stars_004.c}
+		\end{frame}
+
+	\begin{frame}{Can You Predict The Output?}
+			\lstinputlisting[language=C]{../source/stars_005.c}
+		\end{frame}
+
+	\begin{frame}{Can You Predict The Output?}
+			\scalebox{0.85}{%
+				\lstinputlisting[language=C]{../source/stars_006.c}}
+		\end{frame}
+
+	\begin{frame}{Can You Predict The Output?}
+			\lstinputlisting[language=C]{../source/stars_007.c}
+		\end{frame}
+
+	\begin{frame}{A \texttt{const} Interlude}
+			\begin{minipage}{0.4\textwidth}
+					Consider the program shown right. Which of the following inserted in line 12 will raise an error?
+					\begin{enumerate}
+							\item \texttt{(*p1)++;}
+							\item \texttt{(*p2)++;}
+							\item \texttt{p1 = \&y;}
+							\item \texttt{p2 = \&y;}
+						\end{enumerate}
+				\end{minipage}\hfill
+			\begin{minipage}{0.56\textwidth}
+					\lstinputlisting[language=C]{../source/stars_008.c}
+				\end{minipage}
+		\end{frame}
+
+	\begin{frame}{Pointers To Constant Variables}
+			\begin{minipage}{0.4\textwidth}
+					In this case, pointer \texttt{p1} is pointing to a \textbf{constant} integer variable. This means that at the memory location \texttt{p1} is pointing to we can make no modifications!
+				\end{minipage}\hfill
+			\begin{minipage}{0.56\textwidth}
+					\lstinputlisting[language=C]{../source/stars_009.c}
+				\end{minipage}
+		\end{frame}
+
+	\begin{frame}{Pointers To Constant Variables}
+			\begin{minipage}{0.4\textwidth}
+					In this case, pointer \texttt{p2} is a \textbf{constant} pointer pointing to an integer variable. This means that at the memory location \texttt{p2} is pointing to we can make any modifications we want to. What we can't change is the value of the pointer itself.
+				\end{minipage}\hfill
+			\begin{minipage}{0.56\textwidth}
+					\lstinputlisting[language=C]{../source/stars_010.c}
+				\end{minipage}
+		\end{frame}
+
+	\begin{frame}{All \texttt{const}?}
+			What about this one?
+			\begin{center}
+					\texttt{const int * const ptr;}
+				\end{center}
+			In this case:\pause
+			\begin{itemize}
+					\item We cannot change where the pointer points to (rightmost \texttt{const}).\pause
+					\item We cannot change the content of the memory location the pointer points to (leftmost \texttt{const}).
+				\end{itemize}
+		\end{frame}
+	
+	
+	\section{Arrays}\label{sec:arrays}
+	
+	\sectionframe
+	
+	\begin{frame}{Arrays In C++}
+		Can you guess what the following will print?
+		\scalebox{0.95}{%
+			\lstinputlisting[language=C]{../source/arrays_001.c}}
+	\end{frame}
+	
+	\begin{frame}{Array Initialisation}
+		We can also provide array elements all at once, as follows:
+		\lstinputlisting[language=C]{../source/arrays_002.c}
+	\end{frame}
+	
+	\begin{frame}{Dynamic Initialisation}
+		We can also initialise the values of an array based on others' input (e.g., users, another process):
+		\scalebox{0.95}{%
+			\lstinputlisting[language=C]{../source/arrays_003.c}}
+	\end{frame}
+	
+	\begin{frame}{What Will This Print?}
+		\lstinputlisting[language=C]{../source/arrays_004.c}
+	\end{frame}
+	
+	\begin{frame}[fragile]{Dynamic Initialisation And Array Size}
+		The above must have printed something along the following lines:
+		\begin{verbatim}
+arrays_004.c: In function ‘int main()’:
+arrays_004.c:6:10: error: storage size of ‘arr’
+isn’t known
+6 |     char arr[];
+  |          ^~~\end{verbatim}
+		This actually means that in order to \textbf{refer to an array's element by its index} you must \textbf{first determine the array's size!}
+	\end{frame}
+	
+	\begin{frame}{Pointers And Arrays}
+		What will the following print?
+		\lstinputlisting[language=C]{../source/arrays_005.c}
+	\end{frame}
+	
+	\begin{headsup}{Pointers And Arrays}
+		Do you observe something strange in the following?
+		\lstinputlisting[language=C, linerange={5-10}]{../source/arrays_005.c}\pause
+		\begin{itemize}
+			\item \textbf{Line 3:} We declare an integer pointer and store the \textbf{array} there, \textbf{not a reference!}\pause
+			\item Why does it work?
+		\end{itemize}
+	\end{headsup}
+	
+	\begin{headsup}{Pointers And Arrays}
+		\begin{itemize}
+			\item In C, arrays of type \texttt{<T>} are actually pointers to items of type \texttt{<T>}.
+			\item This means that, when declaring an array, we are actually declaring a pointer to the first memory location occupied by its first element.
+			\item So, arrays are actually of \textbf{pointer type!}
+			\item This means that using \texttt{\&} to get their memory address is of no use, since they already represent a memory address.
+		\end{itemize}
+	\end{headsup}
+	
+	\begin{frame}{Pointer Tricks}
+		What will the following print?
+		\lstinputlisting[language=C]{../source/arrays_006.c}
+	\end{frame}
+	
+	\begin{frame}{Pointer Tricks}
+		What will the following print?
+		\lstinputlisting[language=C]{../source/arrays_007.c}
+	\end{frame}
+	
+	\begin{frame}{Pointer Tricks}
+		What will the following print?
+		\lstinputlisting[language=C]{../source/arrays_008.c}
+	\end{frame}
+	
+	\begin{frame}{Looping Over An Array}
+		\lstinputlisting[language=C]{../source/arrays_009.c}
+	\end{frame}
+	
+	\begin{frame}{Looping Over An Array With Pointers}
+		Can you loop over the same array without using the \texttt{arr[i]} syntax?\pause
+		\lstinputlisting[language=C]{../source/arrays_010.c}
+	\end{frame}
+	
+	\begin{frame}{Pointer Arithmetic (Again)}
+		\begin{itemize}
+			\item In general, the expression \texttt{pointer + integer} is interpreted as: increment the \texttt{pointer} by the size of its pointing type times the \texttt{integer}.
+			\item So, for an \texttt{int* ptr}, \texttt{ptr + 6} should be interpreted as ``move the pointer \texttt{ptr} by \texttt{6 * sizeof(int)}, i.e., \texttt{6 * 4} bytes''.
+			\item So, for a \texttt{double* ptr}, \texttt{ptr + 5} should be interpreted as ``move the pointer \texttt{ptr} by \texttt{5 * sizeof(double)}, i.e., \texttt{5 * 8} bytes''.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Passing Arrays To Functions}
+		What will this print?
+		
+		\scalebox{0.90}{%
+			\lstinputlisting[language=C]{../source/arrays_011.c}}
+	\end{frame}
+	
+	\begin{frame}{Passing Arrays To Functions}
+		What will this print?
+		
+		\scalebox{0.90}{%
+			\lstinputlisting[language=C]{../source/arrays_012.c}}
+	\end{frame}
+	
+	\begin{frame}{Passing Arrays To Functions}
+		What will this print?
+		
+		\scalebox{0.71}{%
+			\lstinputlisting[language=C]{../source/arrays_013.c}}
+	\end{frame}
+	
+	\begin{headsup}{Array Decay}
+		\begin{itemize}
+			\item A common C catch--phrase is that ``arrays decay into pointers''.
+			\item This simply means that, whenever required, arrays are interpreted as pointers, as we have already discussed above.
+			\item As a consequence, when passing an array to a function, we are actually passing a pointer.
+			\item This means that an array is always \textbf{passed by reference}. So, in case we need to pass an array be value, we have to devise various tricks we shall see in upcoming lectures.
+		\end{itemize}
+	\end{headsup}
+
+%	\section{Arrays \& Strings}\label{sec:arrays----strings}
+%	
+%	\sectionframe
+	
+	\section{Fun Time!}\label{sec:fun-time}
+	
+	\sectionframe
+	
+	\begin{frame}{Advanced Pointer Fun}
+			While we have said enough about pointers, we have not explored pointer--land in full. The following tutorial will help you do so:
+			\begin{center}
+					\ohref{https://learnmoderncpp.com/arrays-pointers-and-loops/}
+				\end{center}
+			Follow the tutorial step--by--step and pay attention to the ``Experiments'' it asks you to execute. Write down your observations in a document, which you will share with me at the end of the class at: \texttt{v.markos@mc-class.gr}.
+		\end{frame}
+	
+	\begin{frame}{Homework}%
+			Complete all exercises and problems in MIT's C++ course second assignment, found here:
+			\begin{center}%
+					\vspace{-1.0\topsep}%
+					\small%
+					\href{https://ocw.mit.edu/courses/6-096-introduction-to-c-january-iap-2011/797ebff419fa2cc3a10af2c5f19be961_MIT6_096IAP11_assn02.pdf}{\texttt{https://ocw.mit.edu/courses/6-096-introduction-to-c-january-iap-\\2011/797ebff419fa2cc3a10af2c5f19be961\_MIT6\_096IAP11\_assn02.pdf}}%
+				\end{center}
+			For your convenience, you can also find the assignment file in this lecture's materials, at: \ohref{../homework/MIT6-096IAP11-assn02.pdf}.
+			Submit all your work in the online form below as a single \texttt{.zip} file:
+			\begin{center}
+					\ohref{https://forms.gle/rSq3VSpcouRAVjqMA}
+				\end{center}
+			or via email at: \texttt{v.markos@mc-class.gr}.
+		\end{frame}
+	
+	\begin{frame}{Any Questions?}
+		\begin{minipage}{0.35\textwidth}
+			\raggedright
+			Do not forget to fill in the questionnaire shown right!
+		\end{minipage}\hfill
+		\begin{minipage}{0.58\textwidth}
+			\vspace{0pt}
+			\raggedleft
+			\includegraphics[scale=0.4]{./assets/post_lesson_assessment.png}
+			\centering
+			\ohref{https://forms.gle/dKSrmE1VRVWqxBGZA}
+		\end{minipage}
+	\end{frame}
+	
+\end{document}

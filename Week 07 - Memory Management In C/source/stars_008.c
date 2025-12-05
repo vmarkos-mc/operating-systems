@@ -1,12 +1,11 @@
-// source/stars_008.cpp
-#include <iostream>
-using namespace std;
+// source/stars_008.c
+#include <stdio.h>
 
 int main() {
     int x, y;
-    cout << "Enter two ints: ";
-    cin >> x;
-    cin >> y;
+    printf("Enter two ints: ");
+    scanf("%d", &x);
+    scanf("%d", &y);
     const int *p1 = &x;
     int * const p2 = &x;
     // Enter your code here...

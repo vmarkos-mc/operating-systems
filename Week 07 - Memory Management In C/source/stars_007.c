@@ -1,12 +1,11 @@
-// source/stars_007.cpp
-#include <iostream>
-using namespace std;
+// source/stars_007.c
+#include <stdio.h>
 
 int main() {
     int x, *y;
-    cout << "Enter an int: ";
-    cin >> x;
+    printf("Enter an int: ");
+    scanf("%d", &x);
     y = &x;
     (*y)++;
-    cout << x << endl;
+	printf("%d\n", x);
 }

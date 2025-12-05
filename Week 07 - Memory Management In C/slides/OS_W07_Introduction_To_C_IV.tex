@@ -1,0 +1,446 @@
+% !TeX spellcheck = en_GB
+% !TeX TS-program = xelatex
+\documentclass[aspectratio=169, 12pt]{beamer}
+\usefonttheme{professionalfonts}
+\usefonttheme{serif}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec-xetex}
+
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{subcaption}
+\setmainfont{Lato}
+
+% Local configuration
+\renewcommand{\figurename}{}
+\DeclareCaptionFormat{custom}
+{%
+	\tiny #3
+}
+\captionsetup{format=custom}
+
+% Title stuff
+\title{Operating Systems}
+\subtitle{A (Soft) Introduction to C, Part IV}
+\date{Week 07}
+\author{Vassilis Markos, Mediterranean College}
+
+\usetheme{streamline}
+
+% Local Commands
+\newcommand{\ohref}[1]{\href{#1}{\texttt{#1}}}
+
+% Math commands
+\newcommand{\qmatr}[4]{{\left(\begin{array}{cc}
+			{#1} & {#2}\\[1.4ex]
+			{#3} & {#4}
+		\end{array}\right)}}
+\newcommand{\tmatr}[9]{\def\arraycolsep{2pt}{\left(\begin{array}{ccc}
+			{#1} & {#2} & {#3}\\[1.4ex]
+			{#4} & {#5} & {#6}\\[1.4ex]
+			{#7} & {#8} & {#9}
+		\end{array}\right)}}
+
+% Code listings
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% makeatletter stuff
+
+\makeatletter
+\newcommand{\arabicthree}[1]{\expandafter\@arabicthree\csname c@#1\endcsname}
+\newcommand{\@arabicthree}[1]{\ifnum #1<100 0\fi\ifnum #1<10 0\fi\number#1}
+\makeatother
+
+\newcounter{exno}
+\setcounter{exno}{0}
+
+\newcommand{\exno}{\stepcounter{exno}In--class Exercise \#\arabicthree{exno}}
+
+\begin{document}
+
+	\begin{frame}
+		\titlepage
+	\end{frame}
+
+	\begin{frame}{Contents}
+		\tableofcontents
+	\end{frame}
+	
+	\section{2D Arrays}\label{sec:-d-arrays}
+	
+	\sectionframe
+	
+	\begin{frame}{(Reminder) Arrays In C}
+		Can you guess what the following will print?
+		\scalebox{0.95}{%
+			\lstinputlisting[language=C]{../source/arrays_001.c}}
+	\end{frame}
+	
+	\begin{frame}{(Reminder) Array Initialisation}
+		We can also provide array elements all at once, as follows:
+		\lstinputlisting[language=C]{../source/arrays_002.c}
+	\end{frame}
+	
+	\begin{frame}{(Reminder) Dynamic Initialisation}
+		We can also initialise the values of an array based on others' input (e.g., users, another process):
+		\scalebox{0.95}{%
+			\lstinputlisting[language=C]{../source/arrays_003.c}}
+	\end{frame}
+
+	\begin{frame}{(Reminder) Passing Arrays To Functions}
+		What will this print?
+		
+		\scalebox{0.90}{%
+			\lstinputlisting[language=C]{../source/arrays_011.c}}
+	\end{frame}
+	
+	\begin{frame}{(Reminder) Passing Arrays To Functions}
+		What will this print?
+		
+		\scalebox{0.90}{%
+			\lstinputlisting[language=C]{../source/arrays_012.c}}
+	\end{frame}
+	
+	\begin{frame}{(Reminder) Passing Arrays To Functions}
+		What will this print?
+		
+		\scalebox{0.71}{%
+			\lstinputlisting[language=C]{../source/arrays_013.c}}
+	\end{frame}
+
+	\begin{headsup}{(Reminder) Array Decay}
+		\begin{itemize}
+			\item A common C catch--phrase is that ``arrays decay into pointers''.
+			\item This simply means that, whenever required, arrays are interpreted as pointers, as we have already discussed above.
+			\item As a consequence, when passing an array to a function, we are actually passing a pointer.
+			\item This means that an array is always \textbf{passed by reference}. So, in case we need to pass an array be value, we have to devise various tricks we shall see in upcoming lectures.
+		\end{itemize}
+	\end{headsup}
+	
+	\begin{frame}{Declaring 2D Arrays}
+		\scalebox{0.68}{%
+			\lstinputlisting[language=C]{../source/2d_arrays_001.c}}
+	\end{frame}
+	
+	\begin{frame}{Declaring 2D Arrays}
+		\scalebox{0.9}{%
+			\lstinputlisting[language=C]{../source/2d_arrays_002.c}}
+	\end{frame}
+	
+	\begin{frame}{Declaring 2D Arrays}
+		\scalebox{0.9}{%
+			\lstinputlisting[language=C]{../source/2d_arrays_003.c}}
+	\end{frame}
+	
+	\begin{frame}{What Will This Print?}
+		\scalebox{0.9}{%
+			\lstinputlisting[language=C]{../source/2d_arrays_004.c}}
+	\end{frame}
+	
+	\begin{frame}[fragile]{2D Array Dimension Declaration}
+		Hopefully, you see something like the following in your console:
+		\begin{verbatim}
+2d_arrays_004.c:7:9: error: declaration of ‘arr’ as multidim
+ensional array must have bounds for all dimensions except the
+first
+7 |     int arr[][] = { 2, 0, -3, 4, 6, 7 };
+  |         ^~~
+\end{verbatim}
+		This is because, as the error says, when it comes to multidimensional arrays, \textbf{all but the first dimensions must be provided!}
+	\end{frame}
+	
+	\begin{frame}{How About This?}
+		\scalebox{0.9}{%
+			\lstinputlisting[language=C]{../source/2d_arrays_005.c}}
+	\end{frame}
+	
+	\begin{frame}{2D Arrays And Functions}
+		The same holds true when declaring arrays as function parameters:
+		\scalebox{0.95}{%
+			\lstinputlisting[language=C]{../source/2d_arrays_007.c}}
+	\end{frame}
+	
+	\begin{frame}{What Will This Print?}
+		\scalebox{0.85}{%
+			\lstinputlisting[language=C]{../source/2d_arrays_006.c}}
+	\end{frame}
+	
+	\begin{frame}{2D Arrays Do Not Exist!}
+		The previous code snippet was not expected to work, but it does for a single reason:
+		\begin{itemize}
+			\item 2D arrays \textbf{do not exist.}
+			\item Indeed, what C does is to flatten the contents of a 2D array to consecutive memory locations.
+			\item Thus, the \texttt{arr[i][j]} syntax does not actually mean ``access the \texttt{arr} element at row \texttt{i} and column \texttt{j}''.
+			\item But, then, how does C interpret \texttt{arr[i][j]}?
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Rows And Columns}
+		Using the following piece of code, can you figure what the C is doing behind the scenes when it comes to \texttt{arr[i][j]}?
+		\scalebox{0.70}{%
+			\lstinputlisting[language=C]{../source/2d_arrays_006.c}}
+	\end{frame}
+	
+	\begin{frame}{2D Array Flattening}
+		\begin{minipage}{0.55\textwidth}
+			C flattens arrays as follows:
+			\begin{itemize}
+				\item All elements are put in memory first according to their row and then based on their column.
+				\item So, essentially, each element could be the element of a one--dimensional array at index $k$, as shown next.
+				\item Compute $k$ as a function of row number $i$ and column number $j$?
+			\end{itemize}
+		\end{minipage}\hfill
+		\begin{minipage}{0.43\textwidth}
+			\begin{tikzpicture}[node distance = 1cm]
+			\pgfmathtruncatemacro{\rows}{4}
+			\pgfmathtruncatemacro{\cols}{5}
+			\foreach \i in {0,...,\rows} {
+				\foreach \j in {0,...,\cols} {
+					\pgfmathtruncatemacro{\flattened}{\i * (\cols + 1) + \j}
+					\node[draw=black, minimum width=1cm, minimum height=1cm] (\i\j) at (\j,-\i) {\flattened};
+				}
+			}
+			\end{tikzpicture}
+		\end{minipage}
+	\end{frame}
+	
+	\begin{frame}{2D Array Flattening}
+		A flattened array's position index $k$ is related to a 2D array's $i,j$ indices by:\pause
+		\[k=i \cdot \#{\rm columns} + j.\]\pause
+		So, for instance, for a 2D array with 7 columns, the element at row 3 and column 4 (0--based indexing) should be placed at:
+		\[k=3 \cdot 7 + 4=21+4=25,\]
+		i.e., at the 26\textsuperscript{th} position.\pause
+		
+		Can you see why we are allowed to omit (only) the first dimension in 2D array declaration?
+	\end{frame}
+	
+	\begin{frame}{2D Arrays Tips And Tricks}
+		\begin{itemize}
+			\item 2D arrays are mostly used to make things conceptually easier for us (humans). They do not actually exist.
+			\item So, use them whenever you need to make things easier to you.
+			\item But, in general, this comes at a cost regarding memory de--allocation, as we shall see in the future, so be careful whenever you use 2D arrays!
+			\item Alternatively, you can always use flattened 2D arrays, which should offload some memory management worries from you.
+			\item Also, remember that you are allowed to not provide \textbf{only the first} dimension of a multidimensional array!
+		\end{itemize}
+	\end{frame}
+	
+	\section{Strings}
+	
+	%	\sectionframe
+	
+	\begin{frame}{Strings Are Arrays}
+		What will this print?
+		\lstinputlisting[language=C]{../source/strings_001.c}\pause
+		\begin{itemize}
+			\item This should print \texttt{Hi!}.\pause
+			\item The \texttt{\textbackslash0} at the end of the array is a special character, the \texttt{NULL} character which indicates the end of the string.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Using Double Quotes}
+		Strings can also be initialised using double quotes, in which case the compiler adds the \texttt{NULL} character, so we do not need to insert it manually.
+		\lstinputlisting[language=C]{../source/strings_002.c}
+	\end{frame}
+	
+	\begin{frame}{String Libraries}
+		Since strings are arrays, we can manipulate them the same way we would with every other array, however we can also make use of the following libraries:
+		\begin{itemize}
+			\item \texttt{ctype}: character handling.
+			\item \texttt{stdio}: input / output.
+			\item \texttt{stdlib}: general utilities, some of them string--relevant.
+			\item \texttt{string}: string manipulation.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{String Cleanup}
+		What will this print?
+		
+		\scalebox{0.80}{%
+		\lstinputlisting[language=C]{../source/strings_003.c}}
+	\end{frame}
+	
+	\begin{frame}{String Operations}
+		What will this print?
+		
+		\scalebox{0.80}{%
+			\lstinputlisting[language=C]{../source/strings_004.c}}
+	\end{frame}
+	
+	\begin{frame}{String Tips And Tricks}
+		\begin{itemize}
+			\item When looping over strings, using the \texttt{NULL} character is a nice universal way to determine when all the string has been consumed. Thus, we need not pass string length as a parameter in string manipulation functions.
+			\item Since each string contains the \texttt{NULL} character, all strings are by default non--empty!
+			\item Remember that \texttt{char}s are declared using single quotes ('), while strings using double (").
+			\item Some string manipulation functions return strings while we would need a single \texttt{char}. In this case, we have to \textbf{cast the output} to a \texttt{char} before using it!
+		\end{itemize}
+	\end{frame}
+	
+	\section{Fun Time!}
+	
+	\sectionframe
+	
+	\begin{frame}{\exno}
+		Implement the following functions in C:
+		\begin{enumerate}
+			\item A function, \texttt{add()}, that takes as arguments two $3\times 3$ \texttt{double} arrays and returns their sum.
+			\item A function, \texttt{transpose()}, that takes as argument a single $3\times 3$ \texttt{double} array, \texttt{arr}, and returns its transpose, i.e., a $3\times 3$ array whose rows are the columns of \texttt{arr}.
+			\item A function, \texttt{diag()}, that takes a $3\times 3$ double array and computes and return the sum of its diagonal elements.
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{\exno}
+		Implement a C function that:
+		\begin{itemize}
+			\item takes a one dimensional \texttt{int} array of length $25$, and;
+			\item prints the array's elements in a spiral order, i.e., starts from top left and, moving first right, then down, then left and then up, prints elements spiral--wise.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{\exno}
+		Implement tic--tac--toe in C as follows:
+		\begin{itemize}
+			\item Create a $3\times 3$ matrix to represent the game board.
+			\item Implement functions to make moves, check for wins, and check for draws.
+			\item Play the game interactively.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{\exno}
+		The dot product of two vectors is computed as follows:
+		\[(x_1,x_2,x_3)\cdot(y_1,y_2,y_3)=x_1y_1+x_2y_2+x_3y_3.\]
+		Write a C function that takes two 3 dimensional vectors as arguments and computes and returns their dot product.
+	\end{frame}
+	
+	\begin{frame}{\exno}
+		We can multiply two square $2\times 2$ matrices as shown below:
+		\[\qmatr{a_1}{a_2}{a_3}{a_4}\qmatr{b_1}{b_2}{b_3}{b_4}=\qmatr{a_1b_1+a_2b_3}{a_1b_2+a_2b_4}{a_3b_1+a_4b_3}{a_3b_2+a_4b_4}.\]
+		Write a C function that takes two $2\times 2$ double arrays and computes their product.
+	\end{frame}
+	
+	\begin{frame}{\exno}
+		The determinant of a $2\times 2$ matrix is given by the following formula:
+		\[\det\qmatr{a}{b}{c}{d}=ad-bc.\]
+		Write a C function that computes the determinant of a $2\times2$ double array.
+	\end{frame}
+	
+	\begin{frame}{\exno}
+		The determinant of a $3\times 3$ matrix is given by the following formula:
+		\[\footnotesize\det\tmatr{a_1}{a_2}{a_3}{a_4}{a_5}{a_6}{a_7}{a_8}{a_9}=a_1\det\qmatr{a_5}{a_6}{a_8}{a_9}-a_2\det\qmatr{a_1}{a_3}{a_7}{a_9}+a_3\det\qmatr{a_4}{a_5}{a_7}{a_8}.\]
+		Write a C function that computes the determinant of a $3\times3$ double array.
+	\end{frame}
+	
+	\begin{frame}{\exno: Part A}
+		This is a three part self--study exercise. At first, read the following Wikipedia paragraph about how PPM image files are structured:
+		\begin{center}
+			\href{https://en.wikipedia.org/wiki/Netpbm\#PPM_example}{\texttt{https://en.wikipedia.org/wiki/Netpbm\#PPM\_example}}
+		\end{center}
+		Then implement a C function that creates a $256\times 256$ \texttt{.ppm} red image file.
+		
+		\textit{Regarding C and file handling, either recall your C knowledge or look around the web!}
+	\end{frame}
+	
+	\addtocounter{exno}{-1}
+	
+	\begin{frame}{\exno: Part B}
+		\begin{minipage}{0.4\textwidth}
+			As your first actual exercise with PPM images, try to generate an image like the one shown right. To do so, you might find useful to recall how red and green are represented in RGB. 
+		\end{minipage}\hfill
+		\begin{minipage}{0.55\textwidth}
+			\begin{center}
+			\includegraphics[scale=0.65]{./assets/first-ppm.png}
+		\end{center}
+		\end{minipage}
+	\end{frame}
+	
+	\addtocounter{exno}{-1}
+
+	\begin{frame}{\exno: Part C}
+		Being sufficiently exposed to PPM images and C, you now have to implement the following C functions:
+		\begin{itemize}
+			\item a function, \texttt{flipX()} that flips an image across the horizontal axis;
+			\item a function, \texttt{flipY()} that flips an image across the vertical axis;
+			\item a function, \texttt{grayscale()} that turns an image into grayscale.
+		\end{itemize}
+		You can use the image generated in part B to test your functions.
+	\end{frame}
+	
+	\begin{frame}{\exno}
+		Create the following functions in C:
+		\begin{enumerate}
+			\item An int function, \texttt{substrSearch()} that takes two strings, \texttt{needle} and \texttt{haystack} and looks for the first occurrence of \texttt{needle} in \texttt{haystack} and returns its starting index.
+			\item A boolean function \texttt{isPalindrome()} that takes a string and checks whether it is a palindrome, i.e., whether it reads the same right--to--left and left--to--right.
+			\item A boolean function \texttt{isAnagram()} that takes two strings, \texttt{ana} and \texttt{gram} and checks if \texttt{ana} is an anagram of \texttt{gram}, ignoring case and spaces.
+		\end{enumerate}
+	\end{frame}
+
+	\begin{frame}{\exno}
+		Implement a C function \texttt{strComp()} that:
+		\begin{itemize}
+			\item takes as input a string, \texttt{str};
+			\item checks that it contains only characters in the range \texttt{a-z} or \texttt{A-Z};
+			\item spots any characters that repeat at consecutive positions, and;
+			\item returns a string with consecutively occurring characters replaced by a single instance of that character followed by an integer indicating the number of repetitions.
+		\end{itemize}
+		For instance, for input \texttt{aaaabcccd} it should return \texttt{a4bc3d}.
+	\end{frame}
+
+	\begin{frame}{\exno}
+		Read about the Knuth--Morris--Pratt substring search algorithm:
+		\begin{center}
+			\footnotesize
+			\ohref{https://en.wikipedia.org/wiki/Knuth\%E2\%80\%93Morris\%E2\%80\%93Pratt\_algorithm}
+		\end{center}
+		Then implement it in C with an appropriate function and any other required machinery.
+	\end{frame}
+	
+	\begin{frame}{Homework}
+		\begin{enumerate}
+			\item Complete any in--class exercises you haven't so far.
+			\item Since this course's aim is to study socket programming in C, this homework is mostly oriented towards that direction, provided we have studied enough C so far. To get yourselves comfortable with sockets in C, study the tutorial found below:
+			\begin{center}
+				\ohref{https://beej.us/guide/bgnet/html/}
+			\end{center}
+		\end{enumerate}
+		Share your comments and implementations at: \texttt{v.markos@mc-class.gr}
+	\end{frame}
+
+	\begin{frame}{Any Questions?}
+		\begin{minipage}{0.35\textwidth}
+			\raggedright
+			Do not forget to fill in the questionnaire shown right!
+		\end{minipage}\hfill
+		\begin{minipage}{0.58\textwidth}
+			\vspace{0pt}
+			\raggedleft
+			\includegraphics[scale=0.4]{./assets/post_lesson_assessment.png}
+			\centering
+			\ohref{https://forms.gle/dKSrmE1VRVWqxBGZA}
+		\end{minipage}
+	\end{frame}
+	
+\end{document}

@@ -1,16 +1,15 @@
-// source/stars_006.cpp
-#include <iostream>
-using namespace std;
+// source/stars_006c.
+#include <stdio.h>
 
 int main() {
     int x, y;
-    cout << "Enter two ints: ";
-    cin >> x;
-    cin >> y;
+    printf("Enter two ints: ");
+    scanf("%d", &x);
+    scanf("%d", &y);
     int *ptrx = &x;
     int *ptry = &y;
     ptry = ptrx;
     (*ptrx)--;
     ptry = &y;
-    cout << x << ", " << y << endl;  
+	printf("%d, %d\n", x, y);
 }
